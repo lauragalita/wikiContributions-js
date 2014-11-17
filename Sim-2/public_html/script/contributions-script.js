@@ -1,5 +1,6 @@
 // Copyright VOGG 2013
 // Revision ETE 2014 GF
+// mo test
 var oldText, newText, wikiUrlApiPath, wiki, analysisTable, url, user, activeAjaxConnections = 0,
 tabSelected = "Articles";
 
