@@ -341,7 +341,7 @@ function participerDiscussion(title) {
             var taille = list_titre_talks[i].length;
             var queue = list_titre_talks[i].substring(taille-11);
             if(queue=='new section') {
-              nbrNouvelleDiscussion++;
+              nbrNouvelleDiscussion ++;
             }
           }
         }
