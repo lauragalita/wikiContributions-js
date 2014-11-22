@@ -339,10 +339,11 @@ function participerDiscussion(title) {
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
             var taille = usercontribs[i].comment.length;
-            var queue = usercontribs[i].comment.substring(taille-11);
-            alert(queue);
-            if(queue=='new section') {
-              nbrNouvelleDiscussion ++;
+            if(taille>=11){
+              var queue = usercontribs[i].comment.substring(taille-11);
+              if(queue=='new section') {
+                 nbrNouvelleDiscussion ++;
+              }
             }
           }
         }
