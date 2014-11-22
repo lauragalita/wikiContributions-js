@@ -339,6 +339,7 @@ function participerDiscussion(title) {
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
             var taille = list_titre_talks[i].length;
+            alert(taille);
             var queue = list_titre_talks[i].substring(taille-11);
             if(queue=='new section') {
               nbrNouvelleDiscussion ++;
@@ -355,7 +356,7 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Il lence '+ nbrNouvelleDiscussion + 'discussion, ' + 'et le nombre total de discussion: '+ nbrTotalDiscussion );
+          $("#contr_survived").text('Il lence '+ nbrNouvelleDiscussion + ' discussion, ' + 'et le nombre total de discussion: '+ nbrTotalDiscussion );
         }else{
           $("#contr_survived").text('Pas de discussion pour cet article');
         }
