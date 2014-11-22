@@ -357,9 +357,9 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et le nombre total de ses discussion(s) est '+ nbrTotalDiscussion );
+          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et le nombre total de discussion(s) est '+ nbrTotalDiscussion );
         }else{
-          $("#contr_survived").text('Pas de discussion pour cet article');
+          $("#contr_survived").text('Pas de discussion pour cet article et le nombre total de ses discussion(s) est ' + nbrTotalDiscussion);
         }
 
 
