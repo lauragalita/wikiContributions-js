@@ -398,7 +398,7 @@ function clearSommaire () {
 }
 
 function addSommaireValue (item) {
-    var ancien = $("#sommaire_container").html()
+    var ancien = $("#sommaire_container").html();
     var addItem = "<div id=sommaire_" + item.titre + ">" + item.titre + " " + item.value + "</div></div>";
     var sommaire = ancien + addItem;
 
