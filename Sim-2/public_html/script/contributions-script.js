@@ -322,6 +322,7 @@ function participerDiscussion(title) {
       var usercontribs = response.query.usercontribs;
       //var list_titre_talks = "";
       var list_titre_talks = new Array();
+      var nbrTotalDiscussion = usercontribs.length;
       if (usercontribs.length > 0) {
         var i;
         for (i = 0; i < usercontribs.length; ++i) {
@@ -348,7 +349,7 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Oui');
+          $("#contr_survived").text('Le nombre total de discussion: '+ nbrTotalDiscussion );
         }else{
           $("#contr_survived").text('Non');
         }
