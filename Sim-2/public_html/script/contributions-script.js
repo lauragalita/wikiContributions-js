@@ -351,7 +351,7 @@ function participerDiscussion(title) {
         if(resultat){
           $("#contr_survived").text('Le nombre total de discussion: '+ nbrTotalDiscussion );
         }else{
-          $("#contr_survived").text('Non');
+          $("#contr_survived").text('pas de discussion pour cet article');
         }
 
 
