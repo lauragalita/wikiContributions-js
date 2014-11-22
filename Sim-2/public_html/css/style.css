@@ -186,6 +186,12 @@ h2 {
   border-radius: 6px;
 }
 
+#sommaire_container{
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+
 #article_head{
   position: relative;
   top: 10px;
