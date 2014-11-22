@@ -323,7 +323,7 @@ function participerDiscussion(title) {
       //var list_titre_talks = "";
       var list_titre_talks = new Array();
       var nbrTotalDiscussion = usercontribs.length;
-     // var nbrNouvelleDiscussion = 0;
+      var nbrNouvelleDiscussion = 0;
 
       if (usercontribs.length > 0) {
         var i;
