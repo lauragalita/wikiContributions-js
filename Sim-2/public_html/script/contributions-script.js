@@ -1,7 +1,8 @@
 // Copyright VOGG 2013
 // Revision ETE 2014 GF
 var oldText, newText, wikiUrlApiPath, wiki, analysisTable, url, user, activeAjaxConnections = 0,
-tabSelected = "Articles";
+    tabSelected = "Articles";
+
 
 function clearScreen() {
   if(tabSelected === "Articles"){
@@ -56,9 +57,9 @@ function callback_Q1(data, continueFlag) {
       else
         html_list_articles += '<div class="list_articles_item" onclick="getArticle(this);">';
 
-        html_list_articles += '<div class="list_articles_item_title">' + contributions[i].title + '</div>' +
-                              '<span class="list_articles_item_surv"></span>' +
-                              '<div class="list_articles_item_size">Size: ' + contributions[i].size + '</div>';
+      html_list_articles += '<div class="list_articles_item_title">' + contributions[i].title + '</div>' +
+      '<span class="list_articles_item_surv"></span>' +
+      '<div class="list_articles_item_size">Size: ' + contributions[i].size + '</div>';
       if (contributions[i].sizediff < 0) {
         html_list_articles += '<div class="list_articles_item_size_diff">Size diff: <span class="sizediff_neg">' + Math.abs(contributions[i].sizediff) + '</span></div>';
       } else {
@@ -66,8 +67,8 @@ function callback_Q1(data, continueFlag) {
       }
       html_list_articles += '<span class="list_articles_item_time">' + contributions[i].timestamp + '</span>';
       html_list_articles += '<input class="list_articles_item_pageid" type="hidden" value="' + contributions[i].pageid + '"/>' +
-        '<input class="list_articles_item_revid" type="hidden" value="' + contributions[i].revid + '"/>' +
-        '<input class="list_articles_item_parentid" type="hidden" value="' + contributions[i].parentid + '"/></div>';
+      '<input class="list_articles_item_revid" type="hidden" value="' + contributions[i].revid + '"/>' +
+      '<input class="list_articles_item_parentid" type="hidden" value="' + contributions[i].parentid + '"/></div>';
       totalVal += Math.abs(contributions[i].sizediff);
     }
   }
@@ -84,8 +85,8 @@ function callback_Q2(response) {
     var i;
     for (i = 0; i < usercontribs.length; ++i) {
       html_list_talks += '<div class="list_talks_item">' +
-                       '<div class="list_talks_item_title">' + usercontribs[i].title + '</div>' +
-                       '<div class="list_talks_item_comment">' + usercontribs[i].comment + '</div></div>';
+      '<div class="list_talks_item_title">' + usercontribs[i].title + '</div>' +
+      '<div class="list_talks_item_comment">' + usercontribs[i].comment + '</div></div>';
     }
     stopLoading();
     $("#talks").html(html_list_talks);
@@ -94,7 +95,7 @@ function callback_Q2(response) {
 }
 
 function callback_Q3(response) {
-    console.log(response);
+  console.log(response);
   oldText = response.parse.text["*"];
 }
 
@@ -125,9 +126,9 @@ function doGet(url, query) {
 
 function getNextUserContributions(timestamp){
   var uclimitContribution = getUclimitCourrent();
-    wikiUrlRequest = wikiUrlApiPath + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution +
-      "&ucuser=" + user + "&ucstart=" + timestamp +
-      "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
+  wikiUrlRequest = wikiUrlApiPath + "/w/api.php?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution +
+  "&ucuser=" + user + "&ucstart=" + timestamp +
+  "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
   doGet(wikiUrlRequest, "Q5");
 }
 
@@ -150,14 +151,14 @@ function getJsonWiki() {
   }
 
   loading();
-  
+  //---------------------------------- composer le lien pour la requete de wiki ------------------------------
   user = $("#user").val();
   Grisou.WikiHelper.setApiUrlPath($('#url').val());
   wikiUrlApiPath = Grisou.WikiHelper.getApiUrlPath();
 
   if ($("#advanced_search_elems_container").hasClass("visible_advance")) {
     wikiUrlRequest = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
-      "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff";
+    "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff";
     if ($("#datepicker_from").val().length > 0) {
       wikiUrlRequest += "&ucend=" + $("#datepicker_from").val() + "T00%3A00%3A00Z";
     }
@@ -170,17 +171,21 @@ function getJsonWiki() {
     wikiUrlRequest += "&converttitles=";
   } else {
     wikiUrlRequest = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=" + uclimitContribution + "&ucuser=" + user +
-      "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
+    "&ucdir=older&ucnamespace=0&ucprop=ids%7Ctitle%7Ctimestamp%7Ccomment%7Csize%7Csizediff&&converttitles=";
   }
+
+
   if(tabSelected === "Articles")
   {
     doGet(wikiUrlRequest, "Q1");
   }else if(tabSelected === "Talks"){
     var jsonurlTalk = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
-      "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
+        "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
     doGet(jsonurlTalk, "Q2");
   }
 }
+//--------------------------------------------------------------------------------------------------------------------------
+
 
 function getUclimitCourrent(){
   return Math.ceil(($("#articles").height() / 70));
@@ -231,9 +236,9 @@ $(document).ready(function () {
       }
     }
   });
-  
+
   $('#tab_article').tabs();
-  
+
   $("#articles").scroll(function(event){
     var elem = $(this);
     if (elem[0].scrollHeight - elem.scrollTop() - 100 < elem.outerHeight()){
@@ -255,6 +260,7 @@ $(document).ready(function () {
 });
 
 function getArticle(item) {
+
   var article = "";
   loading();
   var title = $(item).find(".list_articles_item_title").text();
@@ -266,34 +272,93 @@ function getArticle(item) {
   var oldRevisionContent = wikiUrlApiPath + "?action=parse&format=json&oldid=" + parentid + "&prop=text";
   var userRevisionContent = wikiUrlApiPath + "?action=parse&format=json&oldid=" + revid + "&prop=text";
   $.when(
-    $.ajax({
-      beforeSend: function (xhr) {
-        activeAjaxConnections++;
-      },
-      url: oldRevisionContent,
-      dataType: "jsonp",
-      type: 'GET',
-      success: function (response) {
-        callback_Q3(response);
-      }
-    }),
-    $.ajax({
-      url: userRevisionContent,
-      dataType: "jsonp",
-      type: 'GET',
-      success: function (response) {
-        callback_Q4(response);
-      }
-    })
+      $.ajax({
+        beforeSend: function (xhr) {
+          activeAjaxConnections++;
+        },
+        url: oldRevisionContent,
+        dataType: "jsonp",
+        type: 'GET',
+        success: function (response) {
+          callback_Q3(response);
+        }
+      }),
+      $.ajax({
+        url: userRevisionContent,
+        dataType: "jsonp",
+        type: 'GET',
+        success: function (response) {
+          callback_Q4(response);
+        }
+      })
   ).then(function () {
-    activeAjaxConnections--;
-    analysisTable = getDiff(oldText, newText);
-    article += analysisTable;
-    if (activeAjaxConnections === 0) {
-      $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
-      $("#contr_survived").text("The contribution survived: N/A");
-      $("#article").html(analysisTable);
-      stopLoading();
+        activeAjaxConnections--;
+        analysisTable = getDiff(oldText, newText);
+        article += analysisTable;
+        if (activeAjaxConnections === 0) {
+          $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
+          $("#contr_survived").text("The contribution survived: N/A");
+          $("#article").html(analysisTable);
+          //RS
+          participerDiscussion(title);
+
+          stopLoading();
+        }
+      });
+}
+
+//RS
+function participerDiscussion(title) {
+  var resultat = false;
+  var jsonurlTalk = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
+      "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
+
+
+  $.ajax({
+    url: jsonurlTalk,
+    dataType: "jsonp",
+    type: 'GET',
+    success: function (response) {
+      var usercontribs = response.query.usercontribs;
+      //var list_titre_talks = "";
+      var list_titre_talks = new Array();
+      var nbrTotalDiscussion = usercontribs.length;
+      if (usercontribs.length > 0) {
+        var i;
+        for (i = 0; i < usercontribs.length; ++i) {
+          list_titre_talks[i] = usercontribs[i].title;
+        }
+        stopLoading();
+
+        var resultat = false;
+        var pourComparer = 'Talk:' + title;
+
+        for(i = 0; i < list_titre_talks.length; ++i){
+          if(list_titre_talks[i] == pourComparer) {
+            resultat = true;
+            break;
+          }
+        }
+
+
+
+        /*var contenu = "";
+         for(i = 0; i < list_titre_talks.length; ++i){
+         contenu += list_titre_talks[i]+',';
+         }
+         $("#contr_survived").text(contenu);*/
+
+        if(resultat){
+          $("#contr_survived").text('Le nombre total de discussion: '+ nbrTotalDiscussion );
+        }else{
+          $("#contr_survived").text('pas de discussion pour cet article');
+        }
+
+
+      }
     }
   });
+
 }
+
+
