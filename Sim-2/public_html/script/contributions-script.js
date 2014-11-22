@@ -324,6 +324,7 @@ function participerDiscussion(title) {
       var list_titre_talks = new Array();
       var nbrTotalDiscussion = usercontribs.length;
       var nbrNouvelleDiscussion = 0;
+      var nbrResponsDiscussion = 0;
 
       if (usercontribs.length > 0) {
         var i;
@@ -343,6 +344,8 @@ function participerDiscussion(title) {
               var queue = usercontribs[i].comment.substring(taille-11);
               if(queue=='new section') {
                  nbrNouvelleDiscussion ++;
+              }else{
+                 nbrResponsDiscussion++;
               }
             }
           }
@@ -357,14 +360,14 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et le nombre total de discussion(s) est '+ nbrTotalDiscussion );
+          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et il repond '+ nbrResponsDiscussion + ' question(s). ');
         }else{
-          $("#contr_survived").text('Pas de discussion pour cet article et le nombre total de ses discussion(s) est ' + nbrTotalDiscussion);
+          $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). ');
         }
 
 
       }else{
-         $("#contr_survived").text('Pas de discussion pour cet article et le nombre total de ses discussion(s) est ' + nbrTotalDiscussion);
+        $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). ');
       }
     }
   });
