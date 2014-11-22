@@ -329,7 +329,7 @@ function participerDiscussion(title) {
         }
         stopLoading();
 
-        //var resultat = false;
+        var resultat = false;
         var pourComparer = 'Talk:' + title;
 
         for(i = 0; i < list_titre_talks.length; ++i){
@@ -338,6 +338,8 @@ function participerDiscussion(title) {
             break;
           }
         }
+
+
 
         /*var contenu = "";
          for(i = 0; i < list_titre_talks.length; ++i){
