@@ -35,13 +35,16 @@ function loading() {
   var left_margin = (parent_width - image_width) / 2;
   $('#loading').css('margin-top', top_margin);
   $('#loading').css('margin-left', left_margin);
-  $("#loading").attr("src", "images/465.gif");
+  $("#loading").attr("src", "images/465_update.gif");
   $("#loading").show();
 }
 
 function callback_Q1(data, continueFlag) {
   var contributions = data.query.usercontribs, totalVal = 0, html_list_articles = "";
   var lastItem = $(".last_item .list_articles_item_pageid").val();
+  var allTitles = "";
+  var sizeEdit = 0;
+  
   $(".list_articles_item").removeClass("last_item");
   if(continueFlag){
     totalVal = parseInt($("#total_score_contr").text());
@@ -70,9 +73,24 @@ function callback_Q1(data, continueFlag) {
       '<input class="list_articles_item_revid" type="hidden" value="' + contributions[i].revid + '"/>' +
       '<input class="list_articles_item_parentid" type="hidden" value="' + contributions[i].parentid + '"/></div>';
       totalVal += Math.abs(contributions[i].sizediff);
+      
+      allTitles = allTitles + contributions[i].title + " ; ";
+      sizeEdit = sizeEdit + contributions[i].size;
     }
   }
   $("#total_score_contr").text(totalVal);
+  
+  clearSommaire();
+    var sommaireItem = {titre: "Nombre d'articles contribue : ", value: contributions.length};
+    addSommaireValue(sommaireItem);
+    sommaireItem = {titre: "Nom des articles pour lequels j'ai contribue : ", value: allTitles};
+    addSommaireValue(sommaireItem);
+    sommaireItem = {titre: "Nombre total de caractere change : ", value: sizeEdit};
+    addSommaireValue(sommaireItem);
+    sommaireItem = {titre: "Articles fermes pour lequel j'ai produit des versions successives : ", value: contributions[0].title};
+    addSommaireValue(sommaireItem);
+    
+    
   stopLoading();
   $("#articles").html(html_list_articles);
   doNext($("#articles"), 0);
@@ -376,10 +394,14 @@ function participerDiscussion(title) {
 
 }
 
+function clearSommaire () {
+    $("#sommaire_container").html("");
+}
 
-//RS
-//function nouvelleDiscussion(str) {
-//  var taille = str.length;
- // var queue = str.substring(taille-11);
- // return (queue=='new section');
-//}
+function addSommaireValue (item) {
+    var ancien = $("#sommaire_container").html();
+    var addItem = "<div id=sommaire_" + item.titre + ">" + item.titre + " " + item.value + "</div></div>";
+    var sommaire = ancien + addItem;
+
+    $("#sommaire_container").html(sommaire);
+}
