@@ -346,7 +346,7 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text(usercontribs.length);
+          $("#contr_survived").text('Oui');
         }else{
           $("#contr_survived").text('Non');
         }
