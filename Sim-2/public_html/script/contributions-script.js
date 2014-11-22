@@ -325,6 +325,7 @@ function participerDiscussion(title) {
       var nbrTotalDiscussion = usercontribs.length;
       var nbrNouvelleDiscussion = 0;
       var nbrResponsDiscussion = 0;
+      var nbrDiscussionArticle = 0;
 
       if (usercontribs.length > 0) {
         var i;
@@ -352,6 +353,7 @@ function participerDiscussion(title) {
         }
 
 
+        nbrDiscussionArticle = nbrNouvelleDiscussion + nbrResponsDiscussion;
 
         /*var contenu = "";
          for(i = 0; i < list_titre_talks.length; ++i){
