@@ -31,11 +31,11 @@ function loading() {
   var image_height = $('#loading').height();
   var parent_width = $('#loading').parent().width();
   var image_width = $('#loading').width();
-  var top_margin = (parent_height - image_height) / 2;
-  var left_margin = (parent_width - image_width) / 2;
+  var top_margin = (parent_height - image_height) / 4;
+  var left_margin = (parent_width - image_width) / 4;
   $('#loading').css('margin-top', top_margin);
   $('#loading').css('margin-left', left_margin);
-  $("#loading").attr("src", "images/465_update.gif");
+  $("#loading").attr("src", "images/465_update2.gif");
   $("#loading").show();
 }
 
@@ -44,6 +44,7 @@ function callback_Q1(data, continueFlag) {
   var lastItem = $(".last_item .list_articles_item_pageid").val();
   var allTitles = "";
   var sizeEdit = 0;
+  var commentTotal = 0;
   
   $(".list_articles_item").removeClass("last_item");
   if(continueFlag){
@@ -76,6 +77,9 @@ function callback_Q1(data, continueFlag) {
       
       allTitles = allTitles + contributions[i].title + " ; ";
       sizeEdit = sizeEdit + contributions[i].size;
+      
+      if (contributions[i].comment !== "")
+        commentTotal++;
     }
   }
   $("#total_score_contr").text(totalVal);
@@ -87,7 +91,7 @@ function callback_Q1(data, continueFlag) {
     addSommaireValue(sommaireItem);
     sommaireItem = {titre: "Nombre total de caractere change : ", value: sizeEdit};
     addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Articles fermes pour lequel j'ai produit des versions successives : ", value: contributions[0].title};
+    sommaireItem = {titre: "Number of comments : ", value: commentTotal};
     addSommaireValue(sommaireItem);
     
     
