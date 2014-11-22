@@ -297,7 +297,7 @@ function getArticle(item) {
         article += analysisTable;
         if (activeAjaxConnections === 0) {
           $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
-          $("#contr_survived").text("The contribution survived: N/A");
+          //$("#contr_survived").text("The contribution survived: N/A");
           $("#article").html(analysisTable);
           //RS
           participerDiscussion(title);
@@ -323,6 +323,10 @@ function participerDiscussion(title) {
       //var list_titre_talks = "";
       var list_titre_talks = new Array();
       var nbrTotalDiscussion = usercontribs.length;
+      var nbrNouvelleDiscussion = 0;
+      var nbrResponsDiscussion = 0;
+      var nbrDiscussionArticle = 0;
+
       if (usercontribs.length > 0) {
         var i;
         for (i = 0; i < usercontribs.length; ++i) {
@@ -336,11 +340,20 @@ function participerDiscussion(title) {
         for(i = 0; i < list_titre_talks.length; ++i){
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
-            break;
+            var taille = usercontribs[i].comment.length;
+            if(taille>=11){
+              var queue = usercontribs[i].comment.substring(taille-11);
+              if(queue=='new section') {
+                 nbrNouvelleDiscussion ++;
+              }else{
+                 nbrResponsDiscussion++;
+              }
+            }
           }
         }
 
 
+        nbrDiscussionArticle = nbrNouvelleDiscussion + nbrResponsDiscussion;
 
         /*var contenu = "";
          for(i = 0; i < list_titre_talks.length; ++i){
@@ -349,12 +362,14 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Le nombre total de discussion: '+ nbrTotalDiscussion );
+          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et il repond '+ nbrResponsDiscussion + ' question(s). Il participe au total: '+ nbrDiscussionArticle + ' discussion(s) pour cet article.');
         }else{
-          $("#contr_survived").text('pas de discussion pour cet article');
+          $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). Il participe au total: '+ nbrDiscussionArticle + ' discussion(s) pour cet article.');
         }
 
 
+      }else{
+        $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). Il participe au total: '+ nbrDiscussionArticle + ' discussion(s) pour cet article.');
       }
     }
   });
@@ -362,3 +377,9 @@ function participerDiscussion(title) {
 }
 
 
+//RS
+//function nouvelleDiscussion(str) {
+//  var taille = str.length;
+ // var queue = str.substring(taille-11);
+ // return (queue=='new section');
+//}
