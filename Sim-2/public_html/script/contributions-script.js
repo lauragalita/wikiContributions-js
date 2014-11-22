@@ -366,9 +366,9 @@ function participerDiscussion(title) {
 }
 
 
-//RS
+//RS/*
 function nouvelleDiscussion(str) {
   var taille = str.length;
   var queue = str.substring(taille-11);
   return (queue=='new section');
-}
+}*/
