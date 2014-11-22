@@ -35,14 +35,13 @@ function loading() {
   var left_margin = (parent_width - image_width) / 2;
   $('#loading').css('margin-top', top_margin);
   $('#loading').css('margin-left', left_margin);
-  $("#loading").attr("src", "images/465_update.gif");
+  $("#loading").attr("src", "images/465.gif");
   $("#loading").show();
 }
 
 function callback_Q1(data, continueFlag) {
   var contributions = data.query.usercontribs, totalVal = 0, html_list_articles = "";
   var lastItem = $(".last_item .list_articles_item_pageid").val();
-  var allTitles = "";
   $(".list_articles_item").removeClass("last_item");
   if(continueFlag){
     totalVal = parseInt($("#total_score_contr").text());
@@ -71,19 +70,12 @@ function callback_Q1(data, continueFlag) {
       '<input class="list_articles_item_revid" type="hidden" value="' + contributions[i].revid + '"/>' +
       '<input class="list_articles_item_parentid" type="hidden" value="' + contributions[i].parentid + '"/></div>';
       totalVal += Math.abs(contributions[i].sizediff);
-      allTitles = allTitles + contributions[i].title + " ; ";
     }
   }
   $("#total_score_contr").text(totalVal);
-    
+  
     clearSommaire();
-    var sommaireItem = {titre: "Nombre d'articles contribue : ", value: contributions.length};
-    addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Nom des articles pour lequels j'ai contribue : ", value: allTitles};
-    addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Articles fermes pour lequel je suis l'auteur : ", value: contributions[0].contributions};
-    addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Articles fermes pour lequel j'ai produit des versions successives : ", value: contributions[0].ucstart};
+    var sommaireItem = {titre: "Nombre de contribution", value: "2"};
     addSommaireValue(sommaireItem);
   
   stopLoading();
@@ -353,6 +345,8 @@ function participerDiscussion(title) {
           }
         }
 
+
+
         /*var contenu = "";
          for(i = 0; i < list_titre_talks.length; ++i){
          contenu += list_titre_talks[i]+',';
@@ -364,6 +358,8 @@ function participerDiscussion(title) {
         }else{
           $("#contr_survived").text('pas de discussion pour cet article');
         }
+
+
       }
     }
   });
