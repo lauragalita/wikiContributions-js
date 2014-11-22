@@ -360,14 +360,14 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et il repond '+ nbrResponsDiscussion + ' question(s). ');
+          $("#contr_survived").text('Il lance '+ nbrNouvelleDiscussion + ' discussion(s) pour cet article, ' + 'et il repond '+ nbrResponsDiscussion + ' question(s). Le nombre total de discussion de est ' + nbrTotalDiscussion);
         }else{
-          $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). ');
+          $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s).  Le nombre total de discussion de est ' + nbrTotalDiscussion);
         }
 
 
       }else{
-        $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s). ');
+        $("#contr_survived").text('Il ne lance pas de discussion pour cet article et il repond '+ nbrResponsDiscussion +  ' question(s).  Le nombre total de discussion de est ' + nbrTotalDiscussion);
       }
     }
   });
