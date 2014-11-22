@@ -297,7 +297,7 @@ function getArticle(item) {
         article += analysisTable;
         if (activeAjaxConnections === 0) {
           $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
-          $("#contr_survived").text("The contribution survived: N/A");
+          //$("#contr_survived").text("The contribution survived: N/A");
           $("#article").html(analysisTable);
           //RS
           participerDiscussion(title);
