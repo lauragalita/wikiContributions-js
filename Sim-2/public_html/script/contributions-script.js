@@ -73,11 +73,6 @@ function callback_Q1(data, continueFlag) {
     }
   }
   $("#total_score_contr").text(totalVal);
-  
-    clearSommaire();
-    var sommaireItem = {titre: "Nombre de contribution", value: "2"};
-    addSommaireValue(sommaireItem);
-  
   stopLoading();
   $("#articles").html(html_list_articles);
   doNext($("#articles"), 0);
@@ -366,14 +361,4 @@ function participerDiscussion(title) {
 
 }
 
-function clearSommaire () {
-    $("#sommaire_container").html("");
-}
 
-function addSommaireValue (item) {
-    var ancien = $("#sommaire_container").html();
-    var addItem = "<div id=sommaire_" + item.titre + ">" + item.titre + " " + item.value + "</div></div>";
-    var sommaire = ancien + addItem;
-
-    $("#sommaire_container").html(sommaire);
-}
