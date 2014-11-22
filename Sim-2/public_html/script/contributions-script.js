@@ -338,7 +338,9 @@ function participerDiscussion(title) {
         for(i = 0; i < list_titre_talks.length; ++i){
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
-            if(nouvelleDiscussion(list_titre_talks[i])) {
+            var taille = list_titre_talks[i].length;
+            var queue = list_titre_talks[i].substring(taille-11);
+            if(queue=='new section') {
               nbrNouvelleDiscussion++;
             }
           }
@@ -367,8 +369,8 @@ function participerDiscussion(title) {
 
 
 //RS
-function nouvelleDiscussion(str) {
-  var taille = str.length;
-  var queue = str.substring(taille-11);
-  return (queue=='new section');
-}
+//function nouvelleDiscussion(str) {
+//  var taille = str.length;
+ // var queue = str.substring(taille-11);
+ // return (queue=='new section');
+//}
