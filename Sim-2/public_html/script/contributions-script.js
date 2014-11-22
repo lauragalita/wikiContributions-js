@@ -338,9 +338,9 @@ function participerDiscussion(title) {
         for(i = 0; i < list_titre_talks.length; ++i){
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
-            var taille = list_titre_talks[i].length;
-            alert(taille);
-            var queue = list_titre_talks[i].substring(taille-11);
+            var taille = usercontribs[i].comment.length;
+            var queue = usercontribs[i].comment.substring(taille-11);
+            alert(queue);
             if(queue=='new section') {
               nbrNouvelleDiscussion ++;
             }
