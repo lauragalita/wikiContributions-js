@@ -323,6 +323,8 @@ function participerDiscussion(title) {
       //var list_titre_talks = "";
       var list_titre_talks = new Array();
       var nbrTotalDiscussion = usercontribs.length;
+      var nbrNouvelleDiscussion = 0;
+
       if (usercontribs.length > 0) {
         var i;
         for (i = 0; i < usercontribs.length; ++i) {
@@ -336,7 +338,9 @@ function participerDiscussion(title) {
         for(i = 0; i < list_titre_talks.length; ++i){
           if(list_titre_talks[i] == pourComparer) {
             resultat = true;
-            break;
+            if(nouvelleDiscussion(list_titre_talks[i])) {
+              nbrNouvelleDiscussion++;
+            }
           }
         }
 
@@ -349,9 +353,9 @@ function participerDiscussion(title) {
          $("#contr_survived").text(contenu);*/
 
         if(resultat){
-          $("#contr_survived").text('Le nombre total de discussion: '+ nbrTotalDiscussion );
+          $("#contr_survived").text(('Il lence '+ nouvelleDiscussion + 'discussion, ' + 'et le nombre total de discussion: '+ nbrTotalDiscussion );
         }else{
-          $("#contr_survived").text('pas de discussion pour cet article');
+          $("#contr_survived").text('Pas de discussion pour cet article');
         }
 
 
@@ -362,3 +366,9 @@ function participerDiscussion(title) {
 }
 
 
+//RS
+function nouvelleDiscussion(str) {
+  var taille = str.length;
+  var queue = str.substring(taille-11);
+  return (queue=='new section');
+}
