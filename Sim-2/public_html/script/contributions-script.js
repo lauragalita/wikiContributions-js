@@ -363,6 +363,8 @@ function participerDiscussion(title) {
         }
 
 
+      }else{
+         $("#contr_survived").text('Pas de discussion pour cet article et le nombre total de ses discussion(s) est ' + nbrTotalDiscussion);
       }
     }
   });
