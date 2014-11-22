@@ -44,7 +44,6 @@ function callback_Q1(data, continueFlag) {
   var lastItem = $(".last_item .list_articles_item_pageid").val();
   var allTitles = "";
   var sizeEdit = 0;
-  var commentTotal = 0;
   
   $(".list_articles_item").removeClass("last_item");
   if(continueFlag){
@@ -77,23 +76,19 @@ function callback_Q1(data, continueFlag) {
       
       allTitles = allTitles + contributions[i].title + " ; ";
       sizeEdit = sizeEdit + contributions[i].size;
-      
-      if (contributions[i].comment !== "")
-        commentTotal++;
     }
   }
   $("#total_score_contr").text(totalVal);
   
   clearSommaire();
-    var sommaireItem = {titre: "Nombre d'articles contribue : ", value: contributions.length};
+    var sommaireItem = {titre: "Number total of contributions : ", value: contributions.length};
     addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Nom des articles pour lequels j'ai contribue : ", value: allTitles};
+    sommaireItem = {titre: "Name of contributed articles : ", value: allTitles};
     addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Nombre total de caractere change : ", value: sizeEdit};
+    sommaireItem = {titre: "Total of caracter changed: ", value: sizeEdit};
     addSommaireValue(sommaireItem);
-    sommaireItem = {titre: "Number of comments : ", value: commentTotal};
+    sommaireItem = {titre: "Number of comments : ", value: "TODO"};
     addSommaireValue(sommaireItem);
-    
     
   stopLoading();
   $("#articles").html(html_list_articles);
@@ -335,7 +330,6 @@ function participerDiscussion(title) {
   var jsonurlTalk = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
       "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
 
-
   $.ajax({
     url: jsonurlTalk,
     dataType: "jsonp",
@@ -374,7 +368,6 @@ function participerDiscussion(title) {
           }
         }
 
-
         nbrDiscussionArticle = nbrNouvelleDiscussion + nbrResponsDiscussion;
 
         /*var contenu = "";
@@ -398,6 +391,8 @@ function participerDiscussion(title) {
 
 }
 
+// Pour ajouter un nouveau champ dans le sommaire il faut appeler addSommaireValue(item)
+// item doit contenir un titre et une value, qui seront affiche dans le div
 function clearSommaire () {
     $("#sommaire_container").html("");
 }
