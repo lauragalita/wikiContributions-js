@@ -292,9 +292,62 @@ function getArticle(item) {
     article += analysisTable;
     if (activeAjaxConnections === 0) {
       $("#article_head").text("Article: '" + title + "' on " + $("#url").val());
-      $("#contr_survived").text("The contribution survived: N/A");
+      //$("#contr_survived").text("The contribution survived: N/A");
+
       $("#article").html(analysisTable);
       stopLoading();
     }
   });
+}
+
+
+//RS
+function participerDiscussion(title) {
+  var resultat = false;
+  var jsonurlTalk = wikiUrlApiPath + "?action=query&list=usercontribs&format=json&uclimit=500&ucuser=" + user +
+      "&ucdir=older&ucnamespace=1&ucprop=title%7Ccomment%7Cparsedcomment";
+
+
+  $.ajax({
+    url: jsonurlTalk,
+    dataType: "jsonp",
+    type: 'GET',
+    success: function (response) {
+      var usercontribs = response.query.usercontribs;
+      //var list_titre_talks = "";
+      var list_titre_talks = new Array();
+      if (usercontribs.length > 0) {
+        var i;
+        for (i = 0; i < usercontribs.length; ++i) {
+          list_titre_talks[i] = usercontribs[i].title;
+        }
+        stopLoading();
+
+        //var resultat = false;
+        var pourComparer = 'Talk:' + title;
+
+        for(i = 0; i < list_titre_talks.length; ++i){
+          if(list_titre_talks[i] == pourComparer) {
+            resultat = true;
+            break;
+          }
+        }
+
+        /*var contenu = "";
+         for(i = 0; i < list_titre_talks.length; ++i){
+         contenu += list_titre_talks[i]+',';
+         }
+         $("#contr_survived").text(contenu);*/
+
+        if(resultat){
+          $("#contr_survived").text(usercontribs.length);
+        }else{
+          $("#contr_survived").text('Non');
+        }
+
+
+      }
+    }
+  });
+
 }
